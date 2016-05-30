@@ -1,0 +1,32 @@
+{
+  "name": "privaverasound2016-data",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tomruttle/privaverasound2016-data.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tomruttle/privaverasound2016-data/issues"
+  },
+  "homepage": "https://github.com/tomruttle/privaverasound2016-data#readme",
+  "dependencies": {
+    "jsonfile": "^2.3.1",
+    "lodash": "^4.13.1",
+    "x-ray": "^2.3.0"
+  },
+  "devDependencies": {
+    "eslint": "^2.11.0",
+    "eslint-config-airbnb": "^9.0.1",
+    "eslint-plugin-import": "^1.8.1",
+    "eslint-plugin-jsx-a11y": "^1.2.2",
+    "eslint-plugin-react": "^5.1.1"
+  }
+}
