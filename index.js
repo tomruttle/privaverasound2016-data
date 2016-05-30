@@ -2,6 +2,8 @@ const xray = require('x-ray');
 const jsonfile = require('jsonfile');
 const _ = require('lodash');
 
+const FILENAME = 'results.json';
+
 const MAX_NUM_STAGES = 20;
 const NUM_DAYS = 6;
 
@@ -74,15 +76,20 @@ const transformDay = (day) =>
       return _.mergeWith(artists, stageArtists, concatoniser);
     }, {});
 
+const exit = (err) => {
+  if (err) {
+    console.error(err);
+    process.exit(1);
+  }
+  process.exit(0);
+};
+
 const lineup = x('http://lineup.primaverasound.es/horarios', '.page-horarios', getStages())
   .paginate('#title_dias span.rojo + span a@href')
   .limit(NUM_DAYS);
 
 lineup((err, days) => {
-  if (err) {
-    console.error(err);
-    process.exit(1);
-  }
+  if (err) { return exit(err); }
 
   const transformed = days.reduce((acc, day) => {
     const artists = transformDay(day);
@@ -93,6 +100,5 @@ lineup((err, days) => {
     Object.assign(acc, { [key]: transformed[key] })
   , {});
 
-  jsonfile.writeFileSync('results.json', ordered, { spaces: 2 });
-  process.exit(0);
+  return jsonfile.writeFile(FILENAME, ordered, { spaces: 2 }, exit);
 });
